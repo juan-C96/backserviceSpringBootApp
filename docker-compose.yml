@@ -1,0 +1,17 @@
+services:
+  eurekaserver:
+    build:
+      context: ./EurekaServer/EurekaServer
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+
+  shipboot:
+    build:
+      context: ./Backend/shipboot
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eurekaserver:8761/eureka/  
+
